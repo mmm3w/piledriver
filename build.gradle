@@ -1,0 +1,25 @@
+plugins {
+    id 'groovy'
+    id 'maven'
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+apply from: 'module.gradle'
+
+dependencies {
+    implementation gradleApi()
+
+    implementation deps.kotlin.stdlib
+    implementation deps.android_gradle_plugin
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.mitsuki.armory'
+            pom.artifactId = 'piledriver'
+            pom.version = module_version.name
+            repository(url: uri("${rootProject.projectDir}/maven"))
+        }
+    }
+}
